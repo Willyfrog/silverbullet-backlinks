@@ -1,0 +1,10 @@
+name: github
+functions:
+  queryEvents:
+    path: ./github.ts:queryEvents
+    events:
+      - query:gh-events
+  queryPulls:
+    path: ./github.ts:queryPulls
+    events:
+      - query:gh-pulls
