@@ -1,6 +1,15 @@
 # SilverBullet plug for Github
 Provides Github events and pull requests as query sources using SB's `<!-- #query -->` mechanism.
 
+## Installation
+Open your `PLUGS` note in SilverBullet and add this plug to the list:
+
+```
+- github:silverbulletmd/silverbullet-github/github.plug.json
+```
+
+Then run the `Plugs: Update` command and off you go!
+
 ## Configuration
 This step is optional, but without it you may be rate limited by the Github API,
 
