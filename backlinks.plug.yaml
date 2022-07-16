@@ -1,10 +1,14 @@
-name: github
+name: backlinks
 functions:
-  queryEvents:
-    path: ./github.ts:queryEvents
+  toggle:
+    path: "./backlinks.ts:toggleBacklinks"
+    command:
+      name: "Show Backlinks for current page"
+      key: ctrl-shift-b
+      mac: Cmd-shift-b
+  updateBacklinks:
+    path: "./backlinks.ts:updateBacklinks"
+    env: client
     events:
-      - query:gh-events
-  queryPulls:
-    path: ./github.ts:queryPulls
-    events:
-      - query:gh-pulls
+      - plug:load
+      - editor:pageSwitched

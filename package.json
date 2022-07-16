@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "author": "Guillermo Vayá",
   "scripts": {
-    "build": "plugos-bundle --exclude yaml handlebars @lezer/lr -- github.plug.yaml",
-    "start": "plugos-bundle -w --exclude yaml handlebars @lezer/lr -- github.plug.yaml"
+    "build": "plugos-bundle --exclude yaml handlebars @lezer/lr -- backlinks.plug.yaml",
+    "start": "plugos-bundle -w --exclude yaml handlebars @lezer/lr -- backlinks.plug.yaml"
   },
   "dependencies": {
     "@silverbulletmd/plugos-silverbullet-syscall": "^0.0.16",
