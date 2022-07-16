@@ -3,7 +3,6 @@ export const css = `
 body {
   font-family: georgia,times,serif;
   font-size: 14pt;
-  max-width: 400px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 20px;
@@ -14,7 +13,9 @@ table {
   width: 100%;
   border-spacing: 0;
 }
-
+li {
+  list-style: none;
+}
 thead tr {
     background-color: #333;
     color: #eee;
