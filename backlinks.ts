@@ -75,7 +75,7 @@ async function showBacklinks(page) {
         </ul>
         </body></html>`,
       iframeSrc,
-      1
+      0.5
     );
   }
 }
@@ -93,6 +93,6 @@ async function getBacklinks(name) {
 }
 
 function formatResults(list: string[]):string {
-  const linkList = list.map((page) => `<li data-page="${page}"><-<span class="wiki-link">[[</span>${page}<span class="wiki-link">]]</span></li>`);
+  const linkList = list.map((page) => `<li data-page="${page}">🖇️ <span class="wiki-link">[[</span><span class="wiki-link-page">${page}</span><span class="wiki-link">]]</span></li>`);
   return linkList.join('');
 }

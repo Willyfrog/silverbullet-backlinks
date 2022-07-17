@@ -53,5 +53,18 @@ hr:after {
     letter-spacing: 1em;
 }
 
+span.wiki-link {
+
+  cursor: pointer;
+  color: #a8abbd;
+}
+
+span.wiki-link-page {
+  color: #0330cb;
+  cursor: pointer;
+  background-color: #4d8dff12;
+  border-radius: 5px;
+  padding: 0 5px;
+}
 </style>
 `;
