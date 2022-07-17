@@ -11,7 +11,7 @@ functions:
     env: client
     events:
       - plug:load
-      - editor:pageSwitched
+      - editor:pageLoaded
   navigateTo:
     path: "./backlinks.ts:navigateTo"
     events:
