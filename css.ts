@@ -1,3 +1,4 @@
+// Css for the iframe in the LHS
 export const css = `
 <style>
 body {

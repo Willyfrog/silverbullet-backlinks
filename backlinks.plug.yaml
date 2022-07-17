@@ -12,3 +12,7 @@ functions:
     events:
       - plug:load
       - editor:pageSwitched
+  navigateTo:
+    path: "./backlinks.ts:navigateTo"
+    events:
+      - backlink:navigateTo
