@@ -19,7 +19,7 @@ export async function toggleBacklinks() {
 }
 
 // if something changes, redraw
-export async function updateBacklinks(plugName: string) {
+export async function updateBacklinks() {
   const name = await getCurrentPage();
   await showBacklinks(name);
 }
