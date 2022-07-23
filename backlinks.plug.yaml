@@ -1,4 +1,5 @@
 name: backlinks
+version: 0.2
 functions:
   toggle:
     path: "./backlinks.ts:toggleBacklinks"
