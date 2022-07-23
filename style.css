@@ -1,9 +1,7 @@
-// Css for the iframe in the LHS
-export const css = `
-<style>
 body {
   font-family: georgia,times,serif;
   font-size: 14pt;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   padding-left: 20px;
@@ -14,9 +12,16 @@ table {
   width: 100%;
   border-spacing: 0;
 }
+
+ul {
+  margin-left: 0;
+  padding-left: 0;
+}
+
 li {
   list-style: none;
 }
+
 thead tr {
     background-color: #333;
     color: #eee;
@@ -66,5 +71,3 @@ span.wiki-link-page {
   border-radius: 5px;
   padding: 0 5px;
 }
-</style>
-`;
