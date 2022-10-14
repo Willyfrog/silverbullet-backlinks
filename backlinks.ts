@@ -1,38 +1,35 @@
+import { asset } from "$sb/plugos-syscall/mod.ts";
+import { clientStore, editor, index } from "$sb/silverbullet-syscall/mod.ts";
+import { showPanel } from "https://deno.land/x/silverbullet@0.1.2/plug-api/silverbullet-syscall/editor.ts";
 
-import {getCurrentPage, hideLhs, showLhs, navigate} from "@silverbulletmd/plugos-silverbullet-syscall/editor";
-import * as clientStore from "@silverbulletmd/plugos-silverbullet-syscall/clientStore"
-// @ts-ignore
-import css from "./style.css";
-import { queryPrefix } from "@silverbulletmd/plugos-silverbullet-syscall";
-
-const BackLinksKey = "showBacklinks"
+const BackLinksKey = "showBacklinks";
 
 export async function toggleBacklinks() {
   const showingBacklinks = (await getBacklinkStatus());
   await clientStore.set(BackLinksKey, !showingBacklinks);
   if (!showingBacklinks) {
-    const name = await getCurrentPage(); 
+    const name = await editor.getCurrentPage();
     await showBacklinks(name);
   } else {
-    await hideLhs()
+    await editor.hidePanel("lhs");
   }
 }
 
 // if something changes, redraw
 export async function updateBacklinks() {
-  const name = await getCurrentPage();
+  const name = await editor.getCurrentPage();
   await showBacklinks(name);
 }
 
 // use internal navigation via syscall to prevent reloading the full page.
-export async function navigateTo(pageRef:string) {
+export async function navigateTo(pageRef: string) {
   if (pageRef.length === 0) {
-    console.log('no page name supplied, ignoring navigation');
+    console.log("no page name supplied, ignoring navigation");
     return;
   }
-  let [page, pos] = pageRef.split('@');
+  const [page, pos] = pageRef.split("@");
   console.log(`navigating to ${pageRef}`);
-  await navigate(page, +pos); // todo: do we have the position for it?
+  await editor.navigate(page, +pos); // todo: do we have the position for it?
 }
 
 // code to run within the iframe
@@ -64,12 +61,17 @@ const iframeSrc = `
 `;
 
 // render function into the LHS
-async function showBacklinks(page) {
+async function showBacklinks(page: string) {
   if (await getBacklinkStatus()) {
     const linksResult = await getBacklinks(page);
+    const css = await asset.readAsset("style.css");
     // TODO: do a better no links found page.
-    const content = linksResult.length === 0 ? "No links found" : formatResults(linksResult);
-    await showLhs(
+    const content = linksResult.length === 0
+      ? "No links found"
+      : formatResults(linksResult);
+    await showPanel(
+      "lhs",
+      0.5,
       `<html><head><style>${css}</style></head><body>
         <h2>Backlinks</h2>
         <ul>
@@ -77,27 +79,28 @@ async function showBacklinks(page) {
         </ul>
         </body></html>`,
       iframeSrc,
-      0.5
     );
   }
 }
 
 // Use store to figure out if backlinks are open or closed.
-async function getBacklinkStatus():Promise<boolean> {
+async function getBacklinkStatus(): Promise<boolean> {
   return !!(await clientStore.get(BackLinksKey));
 }
 
 // Query for backlinks for a page
-async function getBacklinks(name) {
-  const allBackLinksInfo = await queryPrefix(`pl:${name}:`);
-  const allBackLinks = allBackLinksInfo.map(({page, key}) => {
-    const [,, pos] = key.split(':'); // Key: pl:page:pos
+async function getBacklinks(name: string) {
+  const allBackLinksInfo = await index.queryPrefix(`pl:${name}:`);
+  const allBackLinks = allBackLinksInfo.map(({ page, key }) => {
+    const [, , pos] = key.split(":"); // Key: pl:page:pos
     return `${page}@${pos}`;
   });
   return allBackLinks;
 }
 
-function formatResults(list: string[]):string {
-  const linkList = list.map((page) => `<li data-page="${page}">🖇️&nbsp;<span class="wiki-link">[[</span><span class="wiki-link-page">${page}</span><span class="wiki-link">]]</span></li>`);
-  return linkList.join('');
+function formatResults(list: string[]): string {
+  const linkList = list.map((page) =>
+    `<li data-page="${page}">🖇️&nbsp;<span class="wiki-link">[[</span><span class="wiki-link-page">${page}</span><span class="wiki-link">]]</span></li>`
+  );
+  return linkList.join("");
 }
