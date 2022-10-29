@@ -1,5 +1,7 @@
 name: silverbullet-backlinks
 version: 0.2
+assets:
+  - style.css
 functions:
   toggle:
     path: "./backlinks.ts:toggleBacklinks"
