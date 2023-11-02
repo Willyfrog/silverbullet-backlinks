@@ -3,7 +3,7 @@
 
 Provides access to pages that link to the one currently being edited.
 
-**UPDATE:** Backlinks functionality is [now built into Silverbullet]([url](https://github.com/silverbulletmd/silverbullet/blob/main/website/CHANGELOG.md#050)).
+**UPDATE:** Backlinks functionality is [now built into Silverbullet](https://github.com/silverbulletmd/silverbullet/blob/main/website/CHANGELOG.md#050).
 
 ## Wait, SilverBullet?
 
